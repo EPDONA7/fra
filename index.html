@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frezer Dereje Bekele | Personal Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-color: #0f0f11;
+            --text-color: #ffffff;
+            --accent-color: #00d2ff; /* Cyber Blue */
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden; /* Prevents scrollbars during animations */
+        }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem 5%;
+            align-items: center;
+            opacity: 0; /* Hidden initially for animation */
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            color: #aaa;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10%;
+            position: relative;
+        }
+
+        .hero-text {
+            flex: 1;
+            z-index: 2;
+        }
+
+        .hero-text h2 {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .hero-text h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .hero-text p {
+            color: #aaa;
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            background: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            background: var(--accent-color);
+            color: #000;
+            box-shadow: 0 0 20px var(--accent-color);
+        }
+
+        /* --- The Image Area --- */
+        .hero-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+        }
+
+        .image-wrapper {
+            width: 400px;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            /* Placeholder background if image is missing */
+            background: #222; 
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+
+        /* Decorative Background Elements */
+        .circle-blur {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: var(--accent-color);
+            filter: blur(150px);
+            opacity: 0.15;
+            border-radius: 50%;
+            top: 50%;
+            right: 10%;
+            transform: translate(0, -50%);
+            z-index: 0;
+        }
+
+        /* --- Details Section --- */
+        .details-section {
+            padding: 5rem 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            transform: translateY(50px); /* Start lower for animation */
+            opacity: 0;
+        }
+
+        .info-card h3 {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .info-card p {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column-reverse;
+                justify-content: center;
+                text-align: center;
+                height: auto;
+                padding-top: 4rem;
+            }
+            .hero-text h1 { font-size: 2.5rem; }
+            .image-wrapper { width: 300px; height: 350px; margin-bottom: 2rem; }
+            .hero-image-container { justify-content: center; }
+            .hero-text p { margin: 0 auto 2rem auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-anim">
+        <div class="logo">FDB.</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <div class="circle-blur"></div>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h2 class="anim-text">Hello, I am</h2>
+            <h1 class="anim-text">Frezer Dereje<br>Bekele</h1>
+            <p class="anim-text">
+                International Student from <b>Ethiopia</b> currently residing in <b>Delhi, India</b>. 
+                Passionate about learning and exploring new cultures.
+            </p>
+            <button class="btn anim-text">Contact Me</button>
+        </div>
+
+        <div class="hero-image-container">
+            <div class="image-wrapper anim-img">
+                <img src="profile.jpg" alt="Frezer Dereje Bekele">
+            </div>
+        </div>
+    </section>
+
+    <section class="details-section">
+        <div class="info-card">
+            <h3>Nationality</h3>
+            <p>Ethiopian</p>
+        </div>
+        <div class="info-card">
+            <h3>Current Location</h3>
+            <p>Delhi, India</p>
+        </div>
+        <div class="info-card">
+            <h3>Date of Birth</h3>
+            <p>June 4, 2004</p>
+        </div>
+        <div class="info-card">
+            <h3>Visa Status</h3>
+            <p>Student (S-1)</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Frezer Dereje Bekele. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- The Sequence Animation --- //
+        const tl = gsap.timeline();
+
+        // 1. Navigation fades in
+        tl.to(".nav-anim", {
+            opacity: 1,
+            duration: 1,
+            ease: "power2.out"
+        })
+
+        // 2. Image reveals with a sleek scale & slide effect
+        .from(".anim-img", {
+            y: 100,
+            scale: 0.8,
+            opacity: 0,
+            duration: 1.5,
+            ease: "power4.out" // This is the "slow motion" ease
+        }, "-=0.5")
+
+        // 3. Text lines slide up one by one
+        .from(".anim-text", {
+            y: 50,
+            opacity: 0,
+            duration: 1.2,
+            stagger: 0.2, // Time between each line appearing
+            ease: "power3.out"
+        }, "-=1");
+
+        // --- Floating Animation for the Image (Continuous) --- //
+        gsap.to(".image-wrapper", {
+            y: -15,
+            duration: 3,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+
+        // --- Scroll Animation for Details Cards --- //
+        gsap.utils.toArray('.info-card').forEach((card, i) => {
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%", // When top of card hits 85% of viewport
+                    toggleActions: "play none none reverse"
+                },
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                delay: i * 0.1, // Stagger effect
+                ease: "power2.out"
+            });
+        });
+    </script>
+</body>
+</html>
